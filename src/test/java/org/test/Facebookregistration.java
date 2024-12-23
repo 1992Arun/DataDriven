@@ -9,7 +9,7 @@ public class Facebookregistration extends Loginpage {
 	
 
 	
-	@Test(dataProvider ="login", dataProviderClass= ReadData.class)
+	@Test(dataProvider ="Registration", dataProviderClass= ReadData.class, priority =1)
 	public void test(String first, String last, String date, String month, String year, String gender, String mobile) throws InterruptedException{
 	
 		

@@ -25,7 +25,7 @@ public class ReadData extends Loginpage {
 	
 	
    
-   @Test(dataProvider ="login", enabled=false)
+   @Test(dataProvider ="login", priority=-10)
 	
 	public void login(String user, String pass) throws IOException, InterruptedException {
 
@@ -60,9 +60,58 @@ public class ReadData extends Loginpage {
 
 	}
    
+   
 
 
    @DataProvider(name="login")
+	public static String[][] read1() throws InvalidFormatException, IOException {
+		
+	   File loc= new File("C:\\Users\\Arun\\Desktop\\Datadriven\\NewFile.xlsx");
+	   
+	//   FileInputStream is = new FileInputStream(loc);
+	   
+	    wb = WorkbookFactory.create(loc);
+	   
+	    sheet = wb.getSheet("Java");
+	   
+	   int rowno = sheet.getPhysicalNumberOfRows();
+	   
+	   short columno = sheet.getRow(0).getLastCellNum();
+	   
+	   String data[][] = new String[rowno-1][columno];
+	   
+	   
+	   
+	   for(int i=1; i<rowno; i++) {
+	   
+	   Row row = sheet.getRow(i);
+	   
+	   
+	       data[i-1][0] = cell(i, 0);
+	   
+	       data[i-1][1] =  cell(i, 1);
+	       
+//	       data[i-1][2] =  cell(i, 2);
+//	       
+//	       data[i-1][3] =  cell(i, 3);
+//	     
+//	       data[i-1][4] =  cell(i, 4);
+//	       
+//	       data[i-1][6] =  cell(i, 6);
+//	   
+	   }
+	   
+	 
+	   return data;
+	   
+	   
+	   
+	   
+
+	}
+
+
+   @DataProvider(name="Registration")
 	public static String[][] read() throws InvalidFormatException, IOException {
 		
 	   File loc= new File("C:\\Users\\Arun\\Desktop\\Datadriven\\Registration.xlsx");
@@ -77,7 +126,7 @@ public class ReadData extends Loginpage {
 	   
 	   short columno = sheet.getRow(0).getLastCellNum();
 	   
-	   String data[][] = new String[rowno][columno];
+	   String data[][] = new String[rowno-1][columno];
 	   
 	   for(int i=1; i<rowno; i++) {
 	   
@@ -98,7 +147,7 @@ public class ReadData extends Loginpage {
 	   
 	   }
 	   
-	   System.out.println(data);
+	 
 	   return data;
 	   
 	   
